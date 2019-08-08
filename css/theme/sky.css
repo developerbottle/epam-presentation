@@ -25,15 +25,15 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 40px;
   font-weight: normal;
-  color: #333; }
+  color: #333333; }
 
 ::selection {
-  color: #fff;
+  color: #ffffff;
   background: #134674;
   text-shadow: none; }
 
 ::-moz-selection {
-  color: #fff;
+  color: #ffffff;
   background: #134674;
   text-shadow: none; }
 
@@ -52,7 +52,7 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #333;
+  color: #333333;
   font-family: "Quicksand", sans-serif;
   font-weight: normal;
   line-height: 1.2;
@@ -228,7 +228,7 @@ body {
   border: none; }
 
 .reveal .roll span:after {
-  color: #fff;
+  color: #ffffff;
   background: #264c66; }
 
 /*********************************************
@@ -237,7 +237,7 @@ body {
 .reveal section img {
   margin: 15px 0px;
   background: rgba(255, 255, 255, 0.12);
-  border: 4px solid #333;
+  border: 4px solid #333333;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
 
 .reveal section img.plain {
