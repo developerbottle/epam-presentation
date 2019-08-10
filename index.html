@@ -1,17 +1,18 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>reveal.js</title>
+  <title>DRY</title>
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/reveal.css">
-  <link rel="stylesheet" href="css/theme/black.css">
+  <link rel="stylesheet" href="css/theme/custom.css">
+  <link rel="stylesheet" href="css/main.css">
 
   <!-- Theme used for syntax highlighting of code -->
-  <link rel="stylesheet" href="lib/css/monokai.css">
+  <link rel="stylesheet" href="lib/css/atom-one-dark.css">
 
   <!-- Printing and PDF exports -->
   <script>
@@ -25,10 +26,256 @@
 <body>
   <div class="reveal">
     <div class="slides">
-      <section>Slide 1</section>
+      <section id="intro">
+        <h1>DRY</h1>
+        <footer>
+          <small>Made by <em>Shoaziz</em> a.k.a. <em>SHStorm</em></small>
+          <br>
+          <small>&copy; 2019</small>
+        </footer>
+
+        <aside class="notes">
+          Introduce yourself and your topic
+        </aside>
+      </section>
+
       <section>
-        <section>Slide 2.1</section>
-        <section>Slide 2.2</section>
+        <h2>What is DRY?</h2>
+        <p class="fragment fade-right">It is a software development principle</p>
+
+        <aside class="notes">
+          Software development changes rapidly, but there are some fundamentals that do not change for years!
+          Those fundamentals are often stated as principles and DRY is one of those.
+        </aside>
+      </section>
+
+      <section>
+        <section>
+          <h2>DRY</h2>
+          <p class="fragment fade-right">Don't</p>
+          <p class="fragment fade-right">Repeat</p>
+          <p class="fragment fade-right">Yourself</p>
+
+          <aside class="notes">
+            DRY is an acronym itself and it stands for ...
+          </aside>
+        </section>
+
+        <section>
+          <img class="image" src="img/book.jpg" alt="Book">
+
+          <aside class="notes">
+            - First formulated by Andrew Hunt and David Thomas
+          </aside>
+        </section>
+
+        <section>
+          <blockquote>
+            <p>Every <span class="fragment highlight-current-green" data-fragment-index="1">piece of knowledge</span>
+              must have a
+              <span class="fragment highlight-current-green" data-fragment-index="3">single</span>,
+              <span class="fragment highlight-current-green" data-fragment-index="4">unambiguous</span>,
+              <span class="fragment highlight-current-green" data-fragment-index="5">authoritative</span>
+              <span class="fragment highlight-current-green" data-fragment-index="2">representation</span>
+              within a system.</p>
+            <cite><small>"The Pragmatic Programmer" by Andy Hunt and Dave Thomas</small></cite>
+          </blockquote>
+
+          <aside class="notes">
+            - Formulation of DRY
+            - Sounds crazy
+          </aside>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Example:</h2>
+
+          <pre><code class="hljs js" data-line-numbers>
+function sort(array) {
+  const arrayLength = array.length;
+
+  for (let i = 0; i < arrayLength; i += 1) {
+    for (let j = 0; j < arrayLength; j += 1) {
+      if (array[j] > array[j + 1]) {
+        let temp = array[j];
+        array[j] = array[j + 1];
+        array[j + 1] = temp;
+      }
+    }
+  }
+
+  return array;
+}
+
+let numbers = [2, 4, 1, 5, 3];
+numbers = sort(numbers);
+console.log(numbers); // => [1, 2, 3, 4, 5];
+
+// ... other code
+
+let values = [38, 13, 57, 138, 30];
+values = sort(numbers);
+console.log(values); // => [13, 30, 38, 57, 138];
+          </code></pre>
+
+          <aside class="notes">
+            - Function body - piece of knowledge
+            - Function itself - representation (single (is not repeated), unambiguous (clear what it does),
+            authoritative (reliable))
+          </aside>
+        </section>
+
+        <section>
+          <h2>Another example:</h2>
+
+          <pre><code class="hljs js" data-line-numbers>
+const numbers = [2, 4, 1, 5, 3];
+const numbersLength = numbers.length;
+for (let i = 0; i < numbersLength; i += 1) {
+  for (let j = 0; j < numbersLength; j += 1) {
+    if (numbers[j] > numbers[j + 1]) {
+      let temp = numbers[j];
+      numbers[j] = numbers[j + 1];
+      numbers[j + 1] = temp;
+    }
+  }
+}
+console.log(numbers); // => [1, 2, 3, 4, 5];
+
+// ... other code
+
+const values = [38, 13, 57, 138, 30];
+const valuesLength = numbers.length;
+for (let i = 0; i < valuesLength; i += 1) {
+  for (let j = 0; j < valuesLength; j += 1) {
+    if (values[j] > values[j + 1]) {
+      let temp = values[j];
+      values[j] = values[j + 1];
+      values[j + 1] = temp;
+    }
+  }
+}
+console.log(values); // => [13, 30, 38, 57, 138];
+        </code></pre>
+
+          <aside class="notes">
+            - Sorting is a piece of knowledge and it is duplicated
+            - Violation of DRY = WET
+          </aside>
+        </section>
+
+        <section>
+          <h3>WET</h3>
+
+          <p class="fragment fade-right">Write Everything Twice</p>
+          <p class="fragment fade-right">We Enjoy Typing</p>
+          <p class="fragment fade-right">Wasting Everyone's Time</p>
+
+          <aside class="notes">
+            - Multiple acronym meanings
+          </aside>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Practice time!</h2>
+
+          <aside class="notes">
+            Task: to implement a function that gets data object and shows report for it
+          </aside>
+        </section>
+
+        <section>
+          <pre><code class="hljs js" data-line-numbers>
+function showReport(data) {
+  console.log(`Report: ${data.name}`);
+  console.log(`Product: ${data.product}`);
+  console.log(`Total: ${data.total}`);
+  console.log(`Average x day: ${data.total / 365}`);
+  console.log(`Average x month: ${data.total / 12}`);
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code class="hljs js" data-line-numbers>
+function showReport(data) {
+  console.log(`Report: ${data.name}`);
+  console.log(`Product: ${data.product}`);
+  console.log(`Total: ${data.total}`);
+  console.log(`Average x day: ${data.total / 365}`);
+  console.log(`Average x month: ${data.total / 12}`);
+}
+
+function saveReportToFile(data) {
+  let report = '';
+  report += `Report: ${data.name}`;
+  report += `Product: ${data.product}`;
+  report += `Total: ${data.total}`;
+  report += `Average x day: ${data.total / 365}`;
+  report += `Average x month: ${data.total / 12}`;
+
+  fs.writeFile("./report.txt", report, function(error) {
+    console.log(error || "The file was saved!");
+  });
+}
+          </code></pre>
+
+          <aside class="notes">
+            Task is added: to implement a function that gets data object and saves report for it in a file
+          </aside>
+        </section>
+
+        <section>
+          <pre><code class="hljs js" data-line-numbers>
+function createReport(data) {
+  let report = '';
+  report += `Report: ${data.name}\n`;
+  report += `Product: ${data.product}\n`;
+  report += `Total: ${data.total}\n`;
+  report += `Average x day: ${data.total / 365}\n`;
+  report += `Average x month: ${data.total / 12}\n`;
+
+  return report;
+}
+
+function showReport(data) {
+  console.log(createReport(date));
+}
+
+function saveReportToFile(data) {
+  fs.writeFile("./report.txt", createReport(data), function(error) {
+    console.log(error || "The file was saved!");
+  });
+}
+          </code></pre>
+
+          <aside class="notes">
+            DRY solution (the code can be improved, but no need and time for it)
+          </aside>
+        </section>
+      </section>
+
+      <section>
+        <h2>So, why apply DRY?</h2>
+        <ul>
+          <li class="fragment">Easier maintenance</li>
+          <li class="fragment">Less bugs</li>
+          <li class="fragment">Saves time and effort</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Repeat to yourself that you will not repeat yourself :)</h2>
+        <img src="img/dontrepeatyourself.jpg" alt="">
+      </section>
+
+      <section>
+        <h2>Thank you for your attention</h2>
+        <small>by SHStorm</small>
       </section>
     </div>
   </div>
@@ -36,13 +283,8 @@
   <script src="js/reveal.js"></script>
 
   <script>
-    // More info about config & dependencies:
-    // - https://github.com/hakimel/reveal.js#configuration
-    // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
       dependencies: [
-        { src: 'plugin/markdown/marked.js' },
-        { src: 'plugin/markdown/markdown.js' },
         { src: 'plugin/notes/notes.js', async: true },
         { src: 'plugin/highlight/highlight.js', async: true }
       ]
